@@ -1,19 +1,17 @@
 import connectDb from "./config/dbConnect.js";
 import express from 'express'
-import task from "./model/task.js";
-
+import routes from './routes/index.js'
 const connect = await connectDb()
 
+connect.on('error', () => {console.error()})
 connect.once('open', () => {
     console.log('rodando mongo')
 })
 
 const app = express()
-app.use(express.json())
+routes(app)
 
-app.get('/test', async (req, res)=>{
-    const tasksList = await task.find()
-    res.status(200).json(tasksList)
-})
 
 export default app
+
+//TODO: AUTH

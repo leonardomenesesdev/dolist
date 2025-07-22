@@ -1,7 +1,7 @@
 import mongoose from "mongoose"; 
 
 const taskSchema = new mongoose.Schema({
-    userId: {type: mongoose.Types.UUID},
+    userId: {type: mongoose.Types.ObjectId},
     name:{type: String, required: true},
     description: {type: String},
     priority: {type: String, enum: ['low', 'medium', 'high'], default: 'medium'},

@@ -1,5 +1,4 @@
-import task from "../model/task.js";
-
+import task from '../model/Task.js'
 class TaskController{
     static async getTasks(req, res){
         try {
@@ -32,7 +31,7 @@ class TaskController{
             ...req.body, userId: req.user.id
           }
           const newTask = await task.create(taskData)
-          res.status(201).json({ message: `${newTask} created`})
+          res.status(201).json(newTask)
         } catch (error) {
             res.status(500).json({message: `${error.message}`})
         }

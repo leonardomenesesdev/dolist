@@ -5,7 +5,57 @@ import expressAsyncHandler from 'express-async-handler';
 
 const routes = express.Router();
 
-routes.post('/register', expressAsyncHandler(UserController.register));
-routes.post('/login', expressAsyncHandler(UserController.login));
+/**
+ * @swagger
+ * /api/register:
+ *   post:
+ *     summary: Registra um novo usuário
+ *     tags: [Usuários]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Usuário criado
+ *       400:
+ *         description: Dados inválidos
+ */
+routes.post('/register', expressAsyncHandler(UserController.register))
+/**
+ * @swagger
+ * /api/login:
+ *  post:
+ *     summary: Faz login de um usuário
+ *     tags: [Usuários]
+ *     requestBody:
+ *          required: true
+ *          content: 
+ *           application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Usuário logado
+ *       400:
+ *         description: Dados inválidos
+ */
+routes.post('/login', expressAsyncHandler(UserController.login))
 routes.get("/current", validateToken, UserController.currentUser)
+routes.put('/update', validateToken, expressAsyncHandler(UserController.editUser))
+routes.delete('/delete', validateToken, UserController.deleteUser)
 export default routes;

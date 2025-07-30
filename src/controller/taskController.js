@@ -27,9 +27,7 @@ class TaskController{
 
     static async postTask(req, res){
         try {
-          const taskData = {
-            ...req.body, userId: req.user.id
-          }
+          const taskData = {...req.body, userId: req.user.id}
           const newTask = await task.create(taskData)
           res.status(201).json(newTask)
         } catch (error) {

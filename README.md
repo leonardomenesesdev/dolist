@@ -33,36 +33,21 @@
 git clone https://github.com/leonardomenesesdev/dolist.git
 cd dolist
 Instale as dependências:
-
-bash
-Copiar
-Editar
 npm install
-Configure o ambiente:
 
+Configure o ambiente:
 Crie um arquivo .env na raiz do projeto com o seguinte conteúdo:
 
-env
-Copiar
-Editar
 DB_CONNECTION_STRING=coloque_aqui_sua_string_de_conexão_mongodb
 JWT_SECRET=sua_chave_secreta_jwt
+
 Rode a aplicação em modo desenvolvimento:
 
-bash
-Copiar
-Editar
 npm run dev
-Acesse a documentação da API no navegador:
 
-bash
-Copiar
-Editar
+Acesse a documentação da API no navegador:
 http://localhost:3000/api-docs
+
 🧪 Testes
 Execute os testes com:
-
-bash
-Copiar
-Editar
 npm test

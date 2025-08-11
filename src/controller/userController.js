@@ -24,8 +24,6 @@ class UserController{
     
             if (newUser) {
                 return res.status(201).json({ message: `User ${newUser.username} created`, userId: newUser._id });
-            } else {
-                return res.status(400).json({ message: "Não foi possível criar o usuário." });
             }
 
         } catch (error) {
@@ -37,6 +35,7 @@ class UserController{
         }
     }
     static async login(req, res) {
+        try {
         const {email, password} = req.body
         if(!email || !password){
             res.status(400)
@@ -62,9 +61,16 @@ class UserController{
             res.status(401)
             throw new Error("login invalid")
         }
+        } catch (error) {
+            res.status(500).json({message: error.message})   
+        }
     }
     static async currentUser(req, res){
-        res.status(200).json(req.user);
+        try {
+            res.status(200).json(req.user);    
+        } catch (error) {
+            res.status(500).json({message: error.message})       
+        }
     }
 
     static async editUser(req, res){
@@ -89,15 +95,10 @@ class UserController{
             if(userUpdated){
                 res.status(200).json({message: `User ${userUpdated.username} updated`, userId: userUpdated._id})
             } else {
-                res.status(400)
-                throw new Error("User data is invalid")
+                res.status(400).json({message: "User not updated"})
             }
         } catch (error) {
-            console.error("ERRO NO EDIT USER:", error);
-            res.status(500).json({
-                message: "Ocorreu um erro no servidor durante a atualização do usuário.",
-                error: error.message
-            });
+            res.status(500).json({message: error.message});
         }
     }
 
